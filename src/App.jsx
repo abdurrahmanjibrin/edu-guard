@@ -5,6 +5,7 @@ import Menu from './pages/Menu'
 import VideoMateri from './pages/VideoMateri'
 import Panduan from './pages/Panduan'
 import GameEdu from './pages/GameEdu'
+import FullscreenButton from './components/FullscreenButton'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/panduan" element={<Panduan />} />
         <Route path="/game" element={<GameEdu />} />
       </Routes>
+      <FullscreenButton />
     </Router>
   )
 }
