@@ -88,70 +88,72 @@ const GameEdu = () => {
   };
 
   return (
-    <div 
-      className="min-h-screen w-full relative bg-black"
-      style={{
-        backgroundImage: `url('/contoh/${levelData.image}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      {/* Back Button */}
-      <Link 
-        to="/menu" 
-        className="absolute top-4 left-4 z-50 bg-black/40 hover:bg-black/70 text-white font-bold py-2 px-4 rounded-xl backdrop-blur-sm border border-white/30 flex items-center shadow-lg transition-colors"
+    <div className="min-h-screen w-full bg-black flex items-center justify-center overflow-hidden">
+      <div 
+        className="relative w-full max-w-[177.78vh] aspect-video bg-black shadow-2xl"
+        style={{
+          backgroundImage: `url('/contoh/${levelData.image}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
       >
-        <ArrowLeft className="mr-2" /> Kembali
-      </Link>
+        {/* Back Button */}
+        <Link 
+          to="/menu" 
+          className="absolute top-[5%] left-[5%] z-50 bg-black/40 hover:bg-black/70 text-white font-bold py-2 md:py-3 px-4 md:px-6 rounded-xl backdrop-blur-sm border border-white/30 flex items-center shadow-lg transition-colors text-sm md:text-base"
+        >
+          <ArrowLeft className="mr-2 w-4 h-4 md:w-6 md:h-6" /> Kembali
+        </Link>
 
-      {!isCompleted && (
-        <>
-          {/* Invisible Boleh Button */}
-          <button 
-            onClick={() => handleAnswer('boleh')}
-            className="absolute top-[75%] md:top-[78%] left-[10%] md:left-[12%] w-[38%] md:w-[35%] h-[18%] md:h-[18%] cursor-pointer z-40 hover:bg-white/20 rounded-[3rem] transition-colors outline-none"
-            title="Boleh"
-            disabled={showFeedback}
-          />
-
-          {/* Invisible Tidak Boleh Button */}
-          <button 
-            onClick={() => handleAnswer('tidak_boleh')}
-            className="absolute top-[75%] md:top-[78%] right-[10%] md:right-[12%] w-[38%] md:w-[35%] h-[18%] md:h-[18%] cursor-pointer z-40 hover:bg-white/20 rounded-[3rem] transition-colors outline-none"
-            title="Tidak Boleh"
-            disabled={showFeedback}
-          />
-        </>
-      )}
-
-      {/* Feedback Modal Overlay */}
-      {showFeedback && !isCompleted && (
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
-          <div className="bg-white rounded-3xl p-8 max-w-lg w-full flex flex-col items-center shadow-[0_0_40px_rgba(255,255,255,0.3)] transform scale-100 animate-in zoom-in duration-300">
-            {isCorrect ? (
-              <CheckCircle size={80} className="text-green-500 mb-4 animate-bounce" />
-            ) : (
-              <XCircle size={80} className="text-red-500 mb-4 animate-pulse" />
-            )}
-            
-            <h3 className={`text-3xl font-bold mb-4 ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-              {isCorrect ? 'Hebat!' : 'Oops!'}
-            </h3>
-            
-            <p className="text-xl text-center text-gray-800 mb-8 font-medium">
-              {feedbackMessage}
-            </p>
-            
+        {!isCompleted && (
+          <>
+            {/* Invisible Boleh Button */}
             <button 
-              onClick={handleNext}
-              className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-xl font-bold py-3 px-10 rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95"
-            >
-              Lanjutkan
-            </button>
+              onClick={() => handleAnswer('boleh')}
+              className="absolute top-[75%] md:top-[78%] left-[10%] md:left-[12%] w-[38%] md:w-[35%] h-[18%] md:h-[18%] cursor-pointer z-40 hover:bg-white/20 rounded-[3rem] transition-colors outline-none"
+              title="Boleh"
+              disabled={showFeedback}
+            />
+
+            {/* Invisible Tidak Boleh Button */}
+            <button 
+              onClick={() => handleAnswer('tidak_boleh')}
+              className="absolute top-[75%] md:top-[78%] right-[10%] md:right-[12%] w-[38%] md:w-[35%] h-[18%] md:h-[18%] cursor-pointer z-40 hover:bg-white/20 rounded-[3rem] transition-colors outline-none"
+              title="Tidak Boleh"
+              disabled={showFeedback}
+            />
+          </>
+        )}
+
+        {/* Feedback Modal Overlay */}
+        {showFeedback && !isCompleted && (
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
+            <div className="bg-white rounded-3xl p-6 md:p-8 max-w-sm md:max-w-lg w-full flex flex-col items-center shadow-[0_0_40px_rgba(255,255,255,0.3)] transform scale-100 animate-in zoom-in duration-300">
+              {isCorrect ? (
+                <CheckCircle size={80} className="text-green-500 mb-4 animate-bounce" />
+              ) : (
+                <XCircle size={80} className="text-red-500 mb-4 animate-pulse" />
+              )}
+              
+              <h3 className={`text-2xl md:text-3xl font-bold mb-4 ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                {isCorrect ? 'Hebat!' : 'Oops!'}
+              </h3>
+              
+              <p className="text-lg md:text-xl text-center text-gray-800 mb-6 md:mb-8 font-medium">
+                {feedbackMessage}
+              </p>
+              
+              <button 
+                onClick={handleNext}
+                className="bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-lg md:text-xl font-bold py-2 md:py-3 px-8 md:px-10 rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95"
+              >
+                Lanjutkan
+              </button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
